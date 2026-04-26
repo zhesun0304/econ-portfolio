@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import joblib
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 st.title("Sleep Quality Prediction App")
 
@@ -28,7 +29,9 @@ occupation = st.sidebar.selectbox("Occupation", ["Student", "Office Worker", "He
 smoking = st.sidebar.selectbox("Smoking", ["Yes", "No"])
 alcohol = st.sidebar.selectbox("Alcohol Consumption", ["Yes", "No"])
 
-model = joblib.load("model.pkl")
+BASE_DIR = Path(__file__).resolve().parent
+model_path = BASE_DIR / "model.pkl"
+model = joblib.load(model_path)
 
 input_data = pd.DataFrame({
     "Age": [age],
